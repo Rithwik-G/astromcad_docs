@@ -16,29 +16,11 @@ Using Pretrained Models
 -----------------------
 
 .. code-block:: python
-   import os
-   from utils.load_data import get_data
-   from astromcad import build_model, train
-        
-   X_train, X_val, X_test, host_gal_train, host_gal_val, host_gal_test, y_train, y_val, y_test, class_weights, ntimesteps, x_data_anom, host_gal_anom, y_data_anom = get_data()
-   y_class = np.array([classes[np.argmax(i)] for i in y_test])
 
-   Detect.init(host=True)
-   os.makedirs("scores", exist_ok=True)
-
-   path = "scores/norm_scores.csv"
-   anomaly_detector.generate_score_csv([X_test, host_gal_test], path, y_class)
-   print("Normal Class Scores Generated")
-
-   path = "scores/anom_scores.csv"
-   anomaly_detector.generate_score_csv([x_data_anom, host_gal_anom], path, y_data_anom)
-   print("Anom Class Scores Generated")
-
-The score files generated can be used directly to generate plots (see :ref:`plots`).
    
 
-Training Custom Models
-----------------------
+Custom Models
+-------------
 
 Step 1: Build a Classifier
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -98,43 +80,22 @@ Finally, use the MCIF anomaly detector to detect anomalies in your data.
    
    y_class = np.array([classes[np.argmax(i)] for i in y_test])
 
+   Detect.init(host=True)
    os.makedirs("scores", exist_ok=True)
 
+
    path = "scores/norm_scores.csv"
-   anomaly_detector.generate_score_csv([X_test, host_gal_test], path, y_class)
+   Detect.generate_score_csv([X_test, host_gal_test], path, y_class)
    print("Normal Class Scores Generated")
 
-   path = "scores/anom_scores.csv"
-   anomaly_detector.generate_score_csv([x_data_anom, host_gal_anom], path, y_data_anom)
+   path = "/scores/anom_scores.csv"
+   Detect.generate_score_csv([x_data_anom, host_gal_anom], path, y_data_anom)
    print("Anom Class Scores Generated")
 
-The score files generated can be used directly to generate plots (see :ref:`plots`).
 
-.. _plots:
 
-Plotting Results
-----------------
 
-.. code-block:: python
 
-   from utils.figures import *
-   import pandas as pd
-   import random
 
-   norm_results = pd.read_csv("scores/norm_scores.csv")
-   anom_results = pd.read_csv("scores/anom_scores.csv")
 
-   plot_recall(list(norm_results['score']), random.sample(list(anom_results['score']), 100))
-   plt.savefig("../figures/recall.pdf", bbox_inches='tight')
-   plt.show()
-   print("Generated Recall Plot")
 
-   median_score(norm_results, anom_results)
-   plt.savefig("../figures/median_score.pdf", bbox_inches='tight')
-   plt.show()
-   print("Generated Median Score Plot")
-
-   distribution(norm_results, anom_results)
-   plt.savefig("../figures/anomaly_distribution.pdf", bbox_inches='tight')
-   plt.show()
-   print("Generated Anomaly Distribution Plot")

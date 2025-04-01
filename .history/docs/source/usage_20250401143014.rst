@@ -33,8 +33,6 @@ Using Pretrained Models
    path = "scores/anom_scores.csv"
    anomaly_detector.generate_score_csv([x_data_anom, host_gal_anom], path, y_data_anom)
    print("Anom Class Scores Generated")
-
-The score files generated can be used directly to generate plots (see :ref:`plots`).
    
 
 Training Custom Models
@@ -108,10 +106,9 @@ Finally, use the MCIF anomaly detector to detect anomalies in your data.
    anomaly_detector.generate_score_csv([x_data_anom, host_gal_anom], path, y_data_anom)
    print("Anom Class Scores Generated")
 
-The score files generated can be used directly to generate plots (see :ref:`plots`).
+The files generated can be used directly to generate plots (see :ref:`plots`).
 
 .. _plots:
-
 Plotting Results
 ----------------
 
@@ -138,3 +135,12 @@ Plotting Results
    plt.savefig("../figures/anomaly_distribution.pdf", bbox_inches='tight')
    plt.show()
    print("Generated Anomaly Distribution Plot")
+
+   
+
+
+
+
+
+
+
