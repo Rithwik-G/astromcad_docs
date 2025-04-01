@@ -1,4 +1,4 @@
-Welcome to Lumache's documentation!
+Astromcad Documentation
 ===================================
 
 **astromcad** (astro-em-cad) is a Python package that runs automatic and real-time anomaly detection for astronomical transients.
@@ -11,3 +11,4 @@ Contents
 
 .. toctree::
    usage
+   api
